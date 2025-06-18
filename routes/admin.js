@@ -1,7 +1,7 @@
 const { Router, json } = require("express");
 const adminMiddleware = require("../middleware/admin");
 const { Admin, User, Course } = require("../db");
-const { JWT_SECRET } = require("../config");
+const { jwt_secret } = require("../config");
 const router = Router();
 const jwt = require("jsonwebtoken");
 
@@ -10,6 +10,7 @@ router.post("/signup", async (req, res) => {
   // Implement admin signup logic
   const username = req.body.username;
   const password = req.body.password;
+  console.log(jwt_secret);
 
   //check if Admin exists
   const exisitingAdmin = await Admin.findOne({ username });
@@ -38,10 +39,7 @@ router.post("/signin", async (req, res) => {
     password: password,
   });
   if (validatedAdmin) {
-    const token = jwt.sign({
-      username,
-      JWT_SECRET,
-    });
+    const token = jwt.sign({ username }, jwt_secret);
     res.json({ token });
   } else {
     res.status(411).json({ message: "incorrect details" });

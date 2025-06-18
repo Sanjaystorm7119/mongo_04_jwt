@@ -1,17 +1,9 @@
 const mongoose = require("mongoose");
-const mongoose = require("mongoose");
-
 require("dotenv").config(); // Load environment variables from .env
 
 // Connect to MongoDB using the connection string from the .env file
 mongoose
-  .connect(
-    process.env.MONGO_URI
-    //     {
-    //     useNewUrlParser: true, //to use new parse since mongodb 3x used a old one , 5x uses new
-    //     useUnifiedTopology: true, // for better connectivity and consistency
-    //   }
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
@@ -48,6 +40,6 @@ const Course = mongoose.model("Course", CourseSchema);
 
 module.exports = {
   Admin,
-  User, 
+  User,
   Course,
 };

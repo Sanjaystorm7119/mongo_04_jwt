@@ -1,14 +1,13 @@
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const secret = process.env.secret;
-
+// require("dotenv").config();
+// const secret = process.env.secret;
+// const { JWT_SECRET } = require("../04-mongo-with-jwt-auth/config");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
 
-const jwt = process.env.secret;
+
 // Middleware for parsing request bodies
 app.use(bodyParser.json());
 app.use("/admin", adminRouter);
@@ -19,4 +18,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports = jwt;
+// module.exports = jwt_secret;
